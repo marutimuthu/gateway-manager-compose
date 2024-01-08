@@ -1,5 +1,4 @@
 import { Grid, Card, Box, Badge, Typography, Avatar, Chip } from '@mui/material';
-// import SimpleMap from '../SimpleMap';
 import GatewayImage from './GatewayImage'
 // import styles from "./index.scss";
 function StatisticsCard({
@@ -37,7 +36,8 @@ function StatisticsCard({
 }) {
   const gateway = {
     GWD: '/static/images/avatars/4GWD.png',
-    GWE: '/static/images/avatars/4GWE.png'
+    GWE: '/static/images/avatars/4GWE.png',
+    GW_LT: '/static/images/avatars/GW_LT.png'
   };
 
   function assignChipColour(chip1_value) {
@@ -74,8 +74,8 @@ function StatisticsCard({
                     height: '25%'
                   }}
                   variant="rounded"
-                  alt="4GWD"
-                  src={gateway.GWD}
+                  alt="GW_LT"
+                  src={gateway.GW_LT}
                 />)
                   }
                 </Grid>
@@ -94,7 +94,6 @@ function StatisticsCard({
               </Grid>
             </Grid>
 
-            
             <Grid container spacing={2}>
               <Grid item md={6}>
                 <Typography variant="h5">{chip1_key}</Typography>

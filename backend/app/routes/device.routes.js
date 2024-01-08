@@ -3,35 +3,25 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
-  // Retrieve all gateways from user device array
-  router.get("/:id", device.findByOIDarray);
-
-  router.post("/", device.create);
+  router.post("/", device.create); // Create Device
+  
+  router.get("/", device.findAll); // Retrieve all device
+  
+  router.get("/find/:mac_id", device.findByMacid); // Retrieve a single Device with id
+  
+  router.get("/:id", device.findByOIDarray); // Retrieve gateways from user device_ID array
 
   router.post("/ota", device.ota);
 
-  // Retrieve all device
-  router.get("/", device.findAll);
+  // router.get("/:id", device.findOne); // Retrieve a single Device with id
 
-  // // Retrieve all published device
-  // router.get("/published", device.findAllPublished);
+  router.put("/:id", device.update); // Update using id
 
-  // // // Retrieve a single Device with id
-  // router.get("/:id", device.findOne);
+  router.post("/:id", device.update); // Update using id
 
-  // // Retrieve a single Device with id
-  router.get("/find/:mac_id", device.findByMacid);
+  router.delete("/:id", device.delete); // Delete with id
 
-  // Update with id
-  router.put("/:id", device.update);
-
-  router.post("/:id", device.update);
-
-  // Delete with id
-  router.delete("/:id", device.delete);
-
-  // Delete with id
-  router.post("/config/update", device.mqttCommand);
+  router.post("/config/update", device.mqttCommand); // Delete with id
 
   // router.delete("/", device.deleteAll);
 

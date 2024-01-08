@@ -16,10 +16,7 @@ import Checklist from './Checklist';
 import Profile from './Profile';
 import TaskSearch from './TaskSearch';
 
-
 function DashboardTasks() {
-
-
   const [currentTab, setCurrentTab] = useState('analytics');
 
   const tabs = [
@@ -41,6 +38,7 @@ function DashboardTasks() {
         <ProfileHeader />
       </PageTitleWrapper>
       <Container maxWidth="lg">
+
         <Grid
           container
           direction="row"

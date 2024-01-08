@@ -1,7 +1,7 @@
 import App from './App';
 import ReactDOM from 'react-dom';
 import 'src/utils/chart';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './helpers/serviceWorker';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 

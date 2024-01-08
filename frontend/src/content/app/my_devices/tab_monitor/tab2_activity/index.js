@@ -6,6 +6,7 @@ import { server_url } from 'src/api/app.js';
 
 import ActivityLogsTable from './ActivityLogsTable';
 import StatCard from './StatCard';
+import TasksAnalytics from './ActivityGraph';
 
 import axios from 'axios';
 
@@ -57,6 +58,7 @@ function Activity() {
         <title>Activity | Gateway Manager</title>
       </Helmet>
       {loading ? <LinearProgress sx={{ m: 2 }} /> : false}
+      <TasksAnalytics />
       <Grid
         container
         direction="row"

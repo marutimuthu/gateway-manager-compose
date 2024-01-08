@@ -31,45 +31,6 @@ exports.create = (req, res) => {
     });
 };
 
-// Create and Save a new device
-exports.ota = (req, res) => {
-  // Validate request
-  if (!req.body.mac_id) {
-    res.status(400).send({ message: "mac_id can not be empty!" });
-    return;
-  }
-
-  if (client.connected == true) {
-    // console.log(req.body)
-    var topic = req.body.mac_id + "/" + "cmd";
-    // MT OTA URL
-    // var msg = `{"OTA_URL":"${req.body.server_url}/api/file/download/${req.body.bin_file}"}`
-    // setTimeout(() => {
-    //     msg = `{"START_OTA"}`;
-    //     client.publish(topic, msg);
-    // }, 500);
-
-    var msg = `{"action":"ota","url":"${req.body.server_url}/api/file/download/${req.body.bin_file}"}`;
-    client.publish(topic, msg);
-    res.status(200).send({ message: "OTA initiated" });
-  } else {
-    res.status(400).send({ message: "Broker not connected" });
-  }
-  // Save Log of OTA Update
-  // const device = new Device(req.body);
-  // device
-  //     .save(device)
-  //     .then(data => {
-  //         res.send(data);
-  //     })
-  //     .catch(err => {
-  //         res.status(500).send({
-  //             message:
-  //                 err.message || "Some error occurred while creating the device."
-  //         });
-  //     });
-};
-
 // Retrieve all devices from the database.
 exports.findAll = (req, res) => {
   const device_name = req.query.device_name;
@@ -107,6 +68,70 @@ exports.findByMacid = async (req, res) => {
       .status(500)
       .send({ message: "Error retrieving data id: " + err.message });
   }
+};
+
+// Find a single Devoce with an id
+exports.findByOIDarray = async (req, res) => {
+  const user_id = req.params.id;
+
+  try {
+    // console.log(user_id)
+
+    const data = await User.findById(user_id);
+    // .equals(device_id)
+
+    // console.log(data.devices)
+
+    if (!data) {
+      res.status(404).send({ message: "Invalid id: " + user_id });
+    } else {
+      const devices = await Device.find({ _id: { $in: data.devices } });
+      res.send(devices);
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: "Error retrieving data id: " + err.message });
+  }
+};
+
+// Create and Save a new device
+exports.ota = (req, res) => {
+  // Validate request
+  if (!req.body.mac_id) {
+    res.status(400).send({ message: "mac_id can not be empty!" });
+    return;
+  }
+
+  if (client.connected == true) {
+    // console.log(req.body)
+    var topic = req.body.mac_id + "/" + "cmd";
+    // MT OTA URL
+    // var msg = `{"OTA_URL":"${req.body.server_url}/api/file/download/${req.body.bin_file}"}`
+    // setTimeout(() => {
+    //     msg = `{"START_OTA"}`;
+    //     client.publish(topic, msg);
+    // }, 500);
+
+    var msg = `{"action":"ota","url":"${req.body.server_url}/api/file/download/${req.body.bin_file}"}`;
+    client.publish(topic, msg);
+    res.status(200).send({ message: "OTA initiated" });
+  } else {
+    res.status(400).send({ message: "Broker not connected" });
+  }
+  // Save Log of OTA Update
+  // const device = new Device(req.body);
+  // device
+  //     .save(device)
+  //     .then(data => {
+  //         res.send(data);
+  //     })
+  //     .catch(err => {
+  //         res.status(500).send({
+  //             message:
+  //                 err.message || "Some error occurred while creating the device."
+  //         });
+  //     });
 };
 
 // Find a single Devoce with an id
@@ -206,30 +231,6 @@ exports.delete = (req, res) => {
     });
 };
 
-// Find a single Devoce with an id
-exports.findByOIDarray = async (req, res) => {
-  const user_id = req.params.id;
-
-  try {
-    // console.log(user_id)
-
-    const data = await User.findById(user_id);
-    // .equals(device_id)
-
-    // console.log(data.devices)
-
-    if (!data) {
-      res.status(404).send({ message: "Invalid id: " + user_id });
-    } else {
-      const devices = await Device.find({ _id: { $in: data.devices } });
-      res.send(devices);
-    }
-  } catch (err) {
-    res
-      .status(500)
-      .send({ message: "Error retrieving data id: " + err.message });
-  }
-};
 
 // Find a single Devoce with an id
 exports.mqttCommand = async (req, res) => {
