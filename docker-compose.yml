@@ -86,7 +86,7 @@ services:
       - 'traefik.enable=true' 
       # - "traefik.http.routers.frontend.rule=Host(`api.localhost`)"
     environment:
-      - REACT_APP_SERVER_URL: "http://localhost:3030"
+      - REACT_APP_SERVER_URL=http://localhost:3030
     networks:
       - rmnet
 

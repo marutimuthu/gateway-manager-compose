@@ -15,6 +15,7 @@ RUN npm install
 COPY . .
 
 # Building our application
+RUN npx update-browserslist-db@latest
 RUN npm run build
 
 # Fetching the latest nginx image
