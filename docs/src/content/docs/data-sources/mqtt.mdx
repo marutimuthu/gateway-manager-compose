@@ -1,0 +1,29 @@
+---
+title: MQTT
+description: A guide in my new Starlight docs site.
+---
+
+import { Image } from 'astro:assets';
+import image1 from "/src/assets/images/mqtt-1.png"; // Image is 1600x900
+
+### Background
+
+MQTT (Message Queuing Telemetry Transport) is a lightweight and efficient messaging protocol designed for low-bandwidth, high-latency, or unreliable networks, making it well-suited for IoT (Internet of Things) and M2M (Machine-to-Machine) communication. It follows a publish-subscribe model, where devices (publishers) send messages to topics, and other devices (subscribers) receive messages from specific topics they have subscribed to. MQTT minimizes overhead and supports Quality of Service (QoS) levels for message reliability. It is widely used in IoT applications to enable real-time data exchange between connected devices while conserving network resources.
+
+<Image src={image1} alt="A description of my image." />
+
+### Connection Configuration
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Source Name | Metric Name |
+| URL | MQTT URL |
+| Username | Broker Username |
+| Password | Broker Password |
+
+### Tag Configuration
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Tag Name | field name to use in the output |
+| topics | Topics that will be subscribed to |

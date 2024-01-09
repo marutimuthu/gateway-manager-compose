@@ -1,0 +1,47 @@
+---
+title: Modbus
+description: A guide in my new Starlight docs site.
+---
+
+import { Image } from 'astro:assets';
+import image1 from "/src/assets/images/modbus-1.png"; // Image is 1600x900
+
+## Background
+
+Modbus is a widely used communication protocol in the field of industrial automation and control systems. It was developed in the late 1970s and has since become a de facto standard for connecting and communicating between various devices, such as programmable logic controllers (PLCs), sensors, and other industrial equipment. Modbus supports both serial (RS-232, RS-485) and Ethernet-based communication and is known for its simplicity and efficiency.
+
+The Modbus protocol defines a client-server architecture where a "master" device (the client) requests data or issues commands to one or more "slave" devices (servers). It uses a simple request-response mechanism, with standardized function codes, to read and write data registers, coils, discrete inputs, and other parameters on the connected devices. Modbus is widely used for tasks such as monitoring and controlling industrial processes, collecting data from sensors, and supervisory control and data acquisition (SCADA) systems.
+
+There are different variants of the Modbus protocol, including Modbus RTU (using serial communication) and Modbus TCP (using Ethernet), making it versatile and adaptable to various industrial communication needs. Modbus has played a significant role in industrial automation for decades and continues to be an essential communication protocol in many industries.
+
+<Image src={image1} alt="A description of my image." />
+
+### Connection Config TCP-IP
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Source Name | Metric Name |
+| Endpoint | IP Address of Modbus TCP Slave e.g. tcp://192.168.29.51:502 |
+
+### Connection Config RTU
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Source Name | Metric Name |
+| Port | Serial Port of USB Converter |
+| Slave ID | Modbus RTU slave device on the network should have a unique address |
+| Baud Rate | Set the baud rate (communication speed) to match that of the slave devices |
+| Data Bits | Use 8 data bits for Modbus RTU communication |
+| Parity | Set to None, Even, or Odd, depending on the configuration of your Modbus RTU slaves |
+| Stop Bits | Use 1 stop bit |
+
+### Tag Configuration
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Tag Name | field name to use in the output |
+| Function Code | Modbus uses a request-response mechanism with standardized function codes (e.g., 03 for reading holding registers, 06 for writing a single register) |
+| Address | Variable Address |
+| Byte Order | The ordering of bytes |
+| Data Type |  |
+| Scale | multiplier |

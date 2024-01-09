@@ -1,3 +1,10 @@
+---
+title: Setup
+description: A guide in my new Starlight docs site.
+---
+
+## Docker compose
+```
 version: '3.6'
 
 services:
@@ -105,3 +112,5 @@ services:
 networks:
   rmnet:
     driver: bridge
+
+```

@@ -1,0 +1,35 @@
+---
+title: OPCUA
+description: A guide in my new Starlight docs site.
+---
+
+import { Image } from 'astro:assets';
+import image1 from "/src/assets/images/opc-1.jpg"; // Image is 1600x900
+import image2 from "/src/assets/images/opc-2.png"; // Image is 1600x900
+
+## Background
+
+OPC UA, or the OPC Unified Architecture, is a widely adopted and platform-independent industrial communication protocol used in the field of industrial automation and the Industrial Internet of Things (IIoT). It enables seamless and secure data exchange and interoperability between diverse industrial systems and devices, regardless of the manufacturer or underlying technology. 
+
+OPC UA offers a standardized, robust, and extensible framework for transmitting real-time data, alarms, and historical information, making it a key enabler for Industry 4.0 and smart manufacturing initiatives.
+
+<Image src={image1} alt="A description of my image." />
+<Image src={image2} alt="A description of my image." />
+
+### Connection Configuration
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Source Name | Metric Name |
+| Endpoint | OPCUA Connection URL e.g. opc.tcp://AZVMDCCWINDOWS1:49320 |
+| Username | OPCUA Authentication Username |
+| Password | OPCUA Authentication Password |
+
+### Tag Configuration
+
+| Parameter | Description |
+| ----------- | ----------- |
+| Tag Name | field name to use in the output |
+| Namespace | OPC UA namespace of the node (integer value 0 thru 3) |
+| Identifier Type | OPC UA ID type (s=string, i=numeric, g=guid, b=opaque) |
+| Identifier | OPC UA ID (tag as shown in opcua browser) |
