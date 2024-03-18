@@ -47,7 +47,7 @@ services:
     build: ./backend
     ports: 
       # - "3030:8080"
-      - "3033:8080"
+      - "${PORT}:${PORT}"
     # labels:
       # - "traefik.enable=true"
       # - "traefik.http.routers.edge-dataops-ui.rule=Host(`edge.localhost`)"

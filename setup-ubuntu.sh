@@ -22,4 +22,4 @@ git clone https://github.com/marutimuthu/gateway-manager-compose
 cd gateway-manager-compose
 
 # Compose build and start
-docker compose up --build -d
+# docker compose up --build -d
