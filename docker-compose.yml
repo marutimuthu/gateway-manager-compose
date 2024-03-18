@@ -34,10 +34,12 @@ services:
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
     ports:
       - "27017:27017"
+    # volumes:
+    #   - type: bind
+    #     source: ./database/data
+    #     target: /data/db
     volumes:
-      - type: bind
-        source: ./database/data
-        target: /data/db
+      - ./database/data:/data/db
     networks:
       - rmnet
 
