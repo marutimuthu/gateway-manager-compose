@@ -1,28 +1,35 @@
-# Fetching the latest node image on apline linux
-FROM node:16-alpine AS builder
+FROM node:18-alpine
 
-# Declaring env
-# ENV NODE_ENV production
+# Create app directory
+WORKDIR /usr/src/app
 
-# Setting up the work directory
-WORKDIR /app
+# Copy dependency definitions
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
 
-# Installing dependencies
-COPY ./package.json ./
-RUN npm install
+# Install dependecies
+RUN npm i
 
-# Copying all the files in our project
-COPY . .
+# Install pm2
+# RUN npm i pm2 -g
 
-# Building our application
-RUN npx update-browserslist-db@latest
-RUN npm run build
+# Get all the code needed to run the app
+COPY . /usr/src/app
 
-# Fetching the latest nginx image
-FROM nginx
+# Expose the port the app runs in
+EXPOSE 3000
 
-# Copying built assets from builder
-COPY --from=builder /app/build /usr/share/nginx/html
+# RUN npm run build
 
-# Copying our nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Serve the app
+CMD ["npm", "start"]
+
+# FROM nginx:alpine
+
+# WORKDIR /usr/share/nginx/html
+
+# RUN rm -rf ./*
+
+# COPY ./build .
+
+# ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
