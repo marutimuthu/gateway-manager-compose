@@ -39,7 +39,7 @@ services:
     #     source: ./database/data
     #     target: /data/db
     volumes:
-      - ./database/data:/data/db
+      - mongo_data:/data/db
     networks:
       - rmnet
 
@@ -132,3 +132,6 @@ services:
 networks:
   rmnet:
     driver: bridge
+
+volumes:
+  mongo_data:
