@@ -29,9 +29,9 @@ services:
     # labels:
       # - "traefik.enable=true"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=pass
-      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
     ports:
       - "27017:27017"
     volumes:
@@ -52,12 +52,13 @@ services:
       # - "traefik.enable=true"
       # - "traefik.http.routers.edge-dataops-ui.rule=Host(`edge.localhost`)"
     environment:
-      - AUTH_SECRET=bezkoder-secret-key
-      - MONGO_URI=mongodb://user:pass@database:27017
-      - BROKER_URL=mqtt://mqtt:1883
-      - BROKER_USERNAME=
-      - BROKER_PASSWORD=
-      - PORT=3033
+      - AUTH_SECRET=${AUTH_SECRET}
+      - ORIGIN=${ORIGIN}
+      - MONGO_URI=${MONGO_URI}
+      - BROKER_URL=${BROKER_URL}
+      - BROKER_USERNAME=${BROKER_USERNAME}
+      - BROKER_PASSWORD=${BROKER_PASSWORD}
+      - PORT=${PORT}
     # depends_on:
       # - proxy
     networks:
@@ -88,9 +89,8 @@ services:
       # - 'traefik.enable=true' 
       # - "traefik.http.routers.frontend.rule=Host(`api.localhost`)"
     environment:
-      # - REACT_APP_SERVER_URL=http://localhost:3030
-      - REACT_APP_SERVER_URL=http://localhost:3033
-      - REACT_APP_GOOGLE_MAPS_API_KEY=
+      - REACT_APP_SERVER_URL=${REACT_APP_SERVER_URL}
+      - REACT_APP_GOOGLE_MAPS_API_KEY=${REACT_APP_GOOGLE_MAPS_API_KEY}
     networks:
       - rmnet
 
@@ -118,7 +118,7 @@ services:
       - "8000:8000"
       - "9000:9000"
     volumes:
-      - ./portainer-data:/data/
+      - ./portainer/data:/data/
       - /var/run/docker.sock:/var/run/docker.sock
     # depends_on:
       # - reverse-proxy

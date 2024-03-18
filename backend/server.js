@@ -5,11 +5,11 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
-app.use(cors(corsOptions));
 
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: process.env.ORIGIN
 };
+app.use(cors(corsOptions));
 
 const connectDB = require('./app/config/db.config.js')
 require("./app/routes/auth.routes")(app);
