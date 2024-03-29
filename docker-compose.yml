@@ -66,6 +66,29 @@ services:
     networks:
       - rmnet
 
+  backend-dev:
+    container_name: backend-dev
+    restart: always
+    build: ./backend-dev
+    ports: 
+      # - "3030:8080"
+      - "${DEV_PORT}:${DEV_PORT}"
+    # labels:
+      # - "traefik.enable=true"
+      # - "traefik.http.routers.edge-dataops-ui.rule=Host(`edge.localhost`)"
+    environment:
+      - AUTH_SECRET=${DEV_AUTH_SECRET}
+      - ORIGIN=${DEV_ORIGIN}
+      - MONGO_URI=${DEV_MONGO_URI}
+      - BROKER_URL=${DEV_BROKER_URL}
+      - BROKER_USERNAME=${DEV_BROKER_USERNAME}
+      - BROKER_PASSWORD=${DEV_BROKER_PASSWORD}
+      - PORT=${DEV_PORT}
+    # depends_on:
+      # - proxy
+    networks:
+      - rmnet
+
   mqtt:
     container_name: mqtt
     user: "1000:1000"
