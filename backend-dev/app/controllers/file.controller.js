@@ -6,7 +6,7 @@ const baseUrl = BASE_URL + "api/file/download/";
 const mongoose = require("mongoose");
 const MongoClient = require("mongodb").MongoClient;
 const GridFSBucket = require("mongodb").GridFSBucket;
-const mongoClient = new MongoClient(MONGO_URI, { authSource: "admin" });
+const mongoClient = new MongoClient(MONGO_URI+MONGO_UPLOADS_DB, { authSource: "admin" });
 
 // Create and save new file record
 exports.create = async (req, res) => {
