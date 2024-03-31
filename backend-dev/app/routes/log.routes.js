@@ -4,7 +4,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create Log
-  router.post("/", log.create);
+  router.post("/:deviceID", log.create);
 
   // Retrieve all gateways from user device array
   router.get("/:deviceID", log.findByID);
@@ -15,14 +15,22 @@ module.exports = (app) => {
   app.use("/api/log", router);
 };
 
-// POST: /api/log
+// POST: /api/log/{deviceID}
 /**
  * @swagger
- * /api/log:
+ * /api/log/{deviceID}:
  *   post:
  *     tags:
  *     - : 'Device Logs'
  *     summary: Post Device Log
+ *     parameters:
+ *      - in: path
+ *        name: deviceID
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: deviceID
+ *        example: 6605593f6939f3447baeee4e
  *     requestBody:
  *       required: true
  *       content:
@@ -30,9 +38,6 @@ module.exports = (app) => {
  *           schema:
  *             type: object
  *             properties:
- *              deviceID:
- *                 type: string
- *                 example: 6605593f6939f3447baeee4e
  *              wifi_rssi:
  *                 type: integer
  *                 example: -50

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const { MONGO_URI } = require("./env.config");
+var bcrypt = require("bcryptjs");
+const { MONGO_URI, MONGO_DB } = require("./env.config");
 
 const db = require("../models");
 const Role = db.role;
@@ -7,13 +8,15 @@ const User = db.user;
 
 const connectDB = async () => {
   try {
-    mongoose.set('strictQuery', false);
-    const conn = await mongoose.connect(MONGO_URI, {
+    mongoose.set("strictQuery", false);
+    const conn = await mongoose.connect(MONGO_URI + MONGO_DB, {
       authSource: "admin",
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     });
-    console.log(`🚀 MongoDB Connected: [ ${conn.connection.host} ]`);
+    console.log(
+      `🚀 MongoDB Connected: [ ${conn.connection.host} - ${conn.connection.name} ]`
+    );
     initial();
   } catch (error) {
     console.error(`Error: ${error.message}`);
@@ -52,12 +55,12 @@ function initial() {
         }
         console.log("added 'admin' to roles collection");
       });
-      
+
       // Add admin account
       new User({
         username: "admin",
         email: "admin",
-        password: "1234"
+        password: bcrypt.hashSync("1234", 8),
       }).save((err) => {
         if (err) {
           console.log("error", err);

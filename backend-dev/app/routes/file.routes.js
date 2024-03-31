@@ -1,74 +1,52 @@
-module.exports = app => {
-    const file = require("../controllers/file.controller.js");
-    var router = require("express").Router();
-    const multer = require('multer');
+module.exports = (app) => {
+  var router = require("express").Router();
+  const file = require("../controllers/file.controller.js");
+  const { upload } = require("../middlewares");
 
-    //Configuration for Multer
-    const multerStorage = multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, "uploads");
-        },
-        filename: (req, file, cb) => {
-            // console.log(file)
-            const ext = file.mimetype.split("/")[1];
-            // cb(null, `admin-${file.fieldname}-${Date.now()}.${ext}`);
-            // cb(null, `${file.originalname}.${ext}`);
-            cb(null, `${file.originalname}`);
-        },
-    });
+  // Create a new File
+  router.post("/:deviceID", upload.single("file"), file.create);
 
-    // Multer Filter
-    const multerFilter = (req, file, cb) => {
-        if (file.mimetype.split("/")[1] === "pdf") {
-            cb(null, true);
-        } else {
-            cb(new Error("Not a PDF File!!"), false);
-        }
-    };
+  // Find Device Files
+  router.get("/all", file.getAllFiles);
 
-    // Calling the "multer" Function
-    // const upload = multer({ dest: 'uploads/' })
+  // Download file
+  router.get("/download/:fileID", file.download);
 
-    //Calling the "multer" Function
-    const upload = multer({
-        storage: multerStorage,
-        // fileFilter: multerFilter,
-    });
+  // // Rename file
+  // router.put("/:deviceID", file.getOneFile);
 
-    // Create a new File
-    router.post("/", upload.single('file'), file.create);
+  // Download file - Pending
+  router.delete("/:fileID", file.delete);
 
-    // Find user Files
-    router.get("/:id", file.findByUserid);
-
-    // Download file
-    router.get('/download/:filename', file.download);
-
-    // Retrieve all device
-    // router.get("/", file.findAll);
-
-    // // Delete a file with id
-    // router.delete("/:id", file.delete);
-
-    app.use('/api/file', router);
+  app.use("/api/file", router);
 };
 
-
-// POST: /api/file
+// POST: /api/file/{deviceID}
 /**
  * @swagger
- * /api/file:
+ * /api/file/{deviceID}:
  *   post:
  *     tags:
- *     - : 'Device File'
+ *     - : 'Device Files'
  *     summary: Post Device File
+ *     parameters:
+ *      - in: path
+ *        name: deviceID
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: deviceID
+ *        example: 6605593f6939f3447baeee4e
  *     requestBody:
  *       content:
  *         multipart/form-data:
  *           schema:
- *             type: file
- *             format: binary
- *       
+ *             type: object
+ *             properties:
+ *               file:
+ *                  type: file
+ *                  format: file
+ *
  *     responses:
  *       '200':
  *         description: OK
@@ -91,6 +69,181 @@ module.exports = app => {
  *                  message:
  *                    type: array
  *                    example: deviceID can not be empty
+ *       '500':
+ *          description: Internal Server Error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: array
+ *                    example: Internal Server Error
+ */
+
+// GET: /api/file/all
+/**
+ * @swagger
+ * /api/file/all:
+ *   get:
+ *     tags:
+ *     - : 'Device Files'
+ *     summary: Get All files
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     example: "Array of objects"
+ *       '400':
+ *          description: Bad Request
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  data:
+ *                    type: array
+ *                    example: deviceID can not be empty
+ *       '404':
+ *          description: Not Found
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: array
+ *                    example: "Logs Not Found"
+ *       '500':
+ *          description: Internal Server Error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: array
+ *                    example: Internal Server Error
+ */
+
+// GET: /api/file/download/{fileID}
+/**
+ * @swagger
+ * /api/file/download/{fileID}:
+ *   get:
+ *     tags:
+ *     - : 'Device Files'
+ *     summary: Get device files
+ *     parameters:
+ *      - in: path
+ *        name: fileID
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: fileID
+ *        example: 6605593f6939f3447baeee4e
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     example: "Array of objects"
+ *       '400':
+ *          description: Bad Request
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  data:
+ *                    type: array
+ *                    example: deviceID can not be empty
+ *       '404':
+ *          description: Not Found
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: array
+ *                    example: "Logs Not Found"
+ *       '500':
+ *          description: Internal Server Error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: array
+ *                    example: Internal Server Error
+ */
+
+// DELETE: /api/file/{fileID}
+/**
+ * @swagger
+ * /api/file/{fileID}:
+ *   delete:
+ *     tags:
+ *     - : 'Device Files'
+ *     summary: Get All files
+ *     parameters:
+ *      - in: path
+ *        name: fileID
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: fileID
+ *        example: 6605593f6939f3447baeee4e
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     example: "Array of objects"
+ *       '400':
+ *          description: Bad Request
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  data:
+ *                    type: array
+ *                    example: deviceID can not be empty
+ *       '404':
+ *          description: Not Found
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: array
+ *                    example: "Logs Not Found"
  *       '500':
  *          description: Internal Server Error
  *          content:

@@ -73,7 +73,7 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: Unauthorized!
+   *                   example: Unauthorized
    *       '403':
    *         description: The token is not provided.
    *         content:
@@ -83,9 +83,9 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: No token provided!
+   *                   example: No token provided
    *       '500':
-   *         description: Internal Server Error!
+   *         description: Internal Server Error
    *         content:
    *           application/json:
    *             schema:
@@ -93,7 +93,7 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: Internal Server Error!
+   *                   example: Internal Server Error
    * 
    */
   /**
@@ -124,9 +124,9 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: Require Moderator Role!
+   *                   example: Unauthorized
    *       '403':
-   *         description: Unauthorized! No moderator access
+   *         description: The token is not provided.
    *         content:
    *           application/json:
    *             schema:
@@ -134,9 +134,9 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: No token provided!
+   *                   example: No token provided
    *       '500':
-   *         description: Internal Server Error!
+   *         description: Internal Server Error
    *         content:
    *           application/json:
    *             schema:
@@ -144,7 +144,7 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: Internal Server Error!
+   *                   example: Internal Server Error
    *              
    */
 
@@ -165,7 +165,7 @@ module.exports = function (app) {
    *           text/plain:
    *             schema:
    *               type: object
-   *               properties:
+   *               properties:  
    *               example: Admin Content.
    *       '401':
    *         description: The Admin is not authenticaed.
@@ -176,7 +176,7 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: Require Admin Role!
+   *                   example: Unauthorized
    *       '403':
    *         description: Unauthorized! No Admin access
    *         content:
@@ -186,9 +186,9 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: No token provided!
+   *                   example: No token provided
    *       '500':
-   *         description: Internal Server Error!
+   *         description: Internal Server Error
    *         content:
    *           application/json:
    *             schema:
@@ -196,5 +196,5 @@ module.exports = function (app) {
    *               properties:
    *                 message:
    *                   type: array
-   *                   example: Internal Server Error!
+   *                   example: Internal Server Error
    */

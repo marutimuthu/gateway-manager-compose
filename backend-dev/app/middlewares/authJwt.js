@@ -1,22 +1,19 @@
 const jwt = require("jsonwebtoken");
-require('dotenv').config()
+require("dotenv").config();
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
 verifyToken = (req, res, next) => {
-   let token = req.headers["x-access-token"];
- // let token = req.params.id;
-  //console.log(req.params.id);
-  //console.log(res);
-  console.log(token);
+  let token = req.headers["x-access-token"];
+  
   if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
+    return res.status(403).send({ message: "No token provided" });
   }
 
   jwt.verify(token, process.env.AUTH_SECRET, (err, decoded) => {
     if (err) {
-      return res.status(401).send({ message: "Unauthorized!" });
+      return res.status(401).send({ message: "Unauthorized" });
     }
     req.userId = decoded.id;
     next();
@@ -26,17 +23,17 @@ verifyToken = (req, res, next) => {
 isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: "Internal Server Error!" });
+      res.status(500).send({ message: "Internal Server Error" });
       return;
     }
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {
-          res.status(500).send({ message: "Internal Server Error!" });
+          res.status(500).send({ message: "Internal Server Error" });
           return;
         }
 
@@ -47,7 +44,7 @@ isAdmin = (req, res, next) => {
           }
         }
 
-        res.status(401).send({ message: "Require Admin Role!" });
+        res.status(401).send({ message: "Unauthorized" });
         return;
       }
     );
@@ -57,17 +54,17 @@ isAdmin = (req, res, next) => {
 isModerator = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: "Internal Server Error!" });
+      res.status(500).send({ message: "Internal Server Error" });
       return;
     }
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {
-          res.status(500).send({ message: "Internal Server Error!" });
+          res.status(500).send({ message: "Internal Server Error" });
           return;
         }
 
@@ -78,7 +75,7 @@ isModerator = (req, res, next) => {
           }
         }
 
-        res.status(401).send({ message: "Require Moderator Role!" });
+        res.status(401).send({ message: "Unauthorized" });
         return;
       }
     );
@@ -88,6 +85,6 @@ isModerator = (req, res, next) => {
 const authJwt = {
   verifyToken,
   isAdmin,
-  isModerator
+  isModerator,
 };
 module.exports = authJwt;

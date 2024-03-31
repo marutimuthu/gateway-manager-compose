@@ -4,7 +4,7 @@ module.exports = (app) => {
   var router = require("express").Router();
   
   // Create Activity
-  router.post("/", activity.create);
+  router.post("/:deviceID", activity.create);
   
   // Retrieve all gateways from user device array
   router.get("/:deviceID", activity.findByID);
@@ -15,14 +15,22 @@ module.exports = (app) => {
   app.use("/api/activity", router);
 };
 
-// POST: /api/activity
+// POST: /api/activity/{deviceID}
 /**
  * @swagger
- * /api/activity:
+ * /api/activity/{deviceID}:
  *   post:
  *     tags:
  *     - : 'Device Activity'
  *     summary: Post Device Activity
+ *     parameters:
+ *      - in: path
+ *        name: deviceID
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: deviceID
+ *        example: 6605593f6939f3447baeee4e
  *     requestBody:
  *       required: true
  *       content:
@@ -30,9 +38,6 @@ module.exports = (app) => {
  *           schema:
  *             type: object
  *             properties:
- *              deviceID:
- *                 type: string
- *                 example: 6605593f6939f3447baeee4e
  *              activity:
  *                 type: string
  *                 example: Testinngg

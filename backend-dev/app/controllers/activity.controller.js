@@ -6,12 +6,13 @@ const paginatedResults = require("../middlewares/paginate");
 // Create and Save a new device
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.deviceID) {
+  if (!req.params.deviceID) {
     res.status(400).send({ message: "deviceID can not be empty" });
     return;
   }
-
-  const activity = new Activity(req.body);
+  const deviceID = { deviceID: req.params.deviceID };
+  const data = { ...req.body, ...deviceID };
+  const activity = new Activity(data);
 
   // Save device in the database
   activity
