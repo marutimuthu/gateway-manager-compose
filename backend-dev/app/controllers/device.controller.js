@@ -125,6 +125,7 @@ exports.register = (req, res) => {
                         message: "Device Registered",
                         data: {
                           deviceId: `${device._id}`,
+                          accessToken: token,
                         },
                       });
                     }
