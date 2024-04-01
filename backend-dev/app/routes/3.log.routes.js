@@ -22,7 +22,7 @@ module.exports = (app) => {
  *   post:
  *     tags:
  *     - : 'Device Logs'
- *     summary: Post device log
+ *     summary: "Post device log [ device --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID
@@ -91,7 +91,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device Logs'
- *     summary: Get device logs
+ *     summary: "Get device logs [ frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID
@@ -164,7 +164,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device Logs'
- *     summary: Get logs stats
+ *     summary: "Get logs stats [ frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID

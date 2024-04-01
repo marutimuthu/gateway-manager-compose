@@ -33,7 +33,7 @@ module.exports = (app) => {
  *   post:
  *     tags:
  *     - : 'Device'
- *     summary: Register new device
+ *     summary: "Register new device [ device --> server ]"
  *     requestBody:
  *       required: true
  *       content:
@@ -114,7 +114,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device'
- *     summary: Get device details
+ *     summary: "Get device details [ frontend / device --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceId
@@ -165,7 +165,7 @@ module.exports = (app) => {
  *   put:
  *     tags:
  *     - : 'Device'
- *     summary: Update device properties
+ *     summary: "Update device properties [ device / frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceId
@@ -250,7 +250,7 @@ module.exports = (app) => {
  *        required: true
  *        description: deviceId
  *        example: 66052968f2a436a810b67341
- *     summary: Delete device
+ *     summary: "Delete device [ frontend --> server ]"
  *     requestBody:
  *       required: true
  *       content:
@@ -327,7 +327,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device'
- *     summary: Get all user devices
+ *     summary: "Get all user devices [ frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: userId
@@ -379,7 +379,7 @@ module.exports = (app) => {
  *   post:
  *     tags:
  *     - : 'Device Command'
- *     summary: Publish MQTT Command to device - HTTP to MQTT bridge
+ *     summary: "Publish MQTT Command to device - HTTP to MQTT bridge [ frontend --> server --> device ]"
  *     parameters:
  *      - in: path
  *        name: deviceId

@@ -12,6 +12,12 @@ module.exports = (app) => {
   // Download file
   router.get("/download/:fileID", file.download);
 
+  // Download file
+  // router.get("/download/config/:fileID", file.download);
+  
+  // Download file
+  // router.get("/download/firmware/:fileID", file.download);
+
   // // Rename file
   // router.put("/:deviceID", file.getOneFile);
 
@@ -28,7 +34,7 @@ module.exports = (app) => {
  *   post:
  *     tags:
  *     - : 'Device Files'
- *     summary: Upload file
+ *     summary: "Upload file [ frontend / device --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID
@@ -88,7 +94,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device Files'
- *     summary: Get all files details
+ *     summary: "Get all files details [ frontend --> server ]"
  *     responses:
  *       '200':
  *         description: OK
@@ -141,7 +147,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device Files'
- *     summary: Download file
+ *     summary: "Download file [ frontend / device --> server ]"
  *     parameters:
  *      - in: path
  *        name: fileID
@@ -202,7 +208,7 @@ module.exports = (app) => {
  *   delete:
  *     tags:
  *     - : 'Device Files'
- *     summary: Delete file
+ *     summary: "Delete file [ frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: fileID

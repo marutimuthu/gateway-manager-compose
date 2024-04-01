@@ -22,7 +22,7 @@ module.exports = (app) => {
  *   post:
  *     tags:
  *     - : 'Device Activity'
- *     summary: Post device activity
+ *     summary: "Post device activity [ device --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID
@@ -91,7 +91,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device Activity'
- *     summary: Get device activities
+ *     summary: "Get device activities [ frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID
@@ -164,7 +164,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device Activity'
- *     summary: Get activities stats
+ *     summary: "Get activities stats [ frontend --> server ]"
  *     parameters:
  *      - in: path
  *        name: deviceID
