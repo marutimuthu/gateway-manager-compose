@@ -29,7 +29,7 @@ module.exports = function (app) {
  *   post:
  *     tags:
  *     - : 'Auth'
- *     summary: Registers a user.
+ *     summary: Register new user
  *     requestBody:
  *       required: true
  *       content:
@@ -97,7 +97,7 @@ module.exports = function (app) {
  *   post:
  *     tags:
  *     - : 'Auth'
- *     summary: Returns userID, deviceIDs and access token
+ *     summary: User Login (returns userID, deviceIDs and access token)
  *     requestBody:
  *       required: true
  *       content:

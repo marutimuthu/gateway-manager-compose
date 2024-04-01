@@ -33,7 +33,7 @@ module.exports = (app) => {
  *   post:
  *     tags:
  *     - : 'Device'
- *     summary: Registers a new device.
+ *     summary: Register new device
  *     requestBody:
  *       required: true
  *       content:
@@ -114,7 +114,7 @@ module.exports = (app) => {
  *   get:
  *     tags:
  *     - : 'Device'
- *     summary: Get one device
+ *     summary: Get device details
  *     parameters:
  *      - in: path
  *        name: deviceId
@@ -165,7 +165,7 @@ module.exports = (app) => {
  *   put:
  *     tags:
  *     - : 'Device'
- *     summary: Update Device Properties
+ *     summary: Update device properties
  *     parameters:
  *      - in: path
  *        name: deviceId
@@ -378,8 +378,8 @@ module.exports = (app) => {
  * /api/device/cmd/{deviceId}:
  *   post:
  *     tags:
- *     - : 'Device'
- *     summary: Publish MQTT Commands
+ *     - : 'Device Command'
+ *     summary: Publish MQTT Command to device - HTTP to MQTT bridge
  *     parameters:
  *      - in: path
  *        name: deviceId

@@ -32,13 +32,13 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 const connectDB = require("./config/db.config.js");
-require("./routes/auth.routes")(app);
+require("./routes/1.auth.routes")(app);
 require("./routes/user.routes")(app);
-require("./routes/device.routes")(app);
-require("./routes/activity.routes")(app);
-require("./routes/log.routes")(app);
+require("./routes/2.device.routes")(app);
+require("./routes/4.activity.routes")(app);
+require("./routes/3.log.routes")(app);
 require("./routes/data.routes")(app);
-require("./routes/file.routes")(app);
+require("./routes/5.file.routes")(app);
 connectDB();
 
 const connectMQTT = require("./config/mqtt.config.js");

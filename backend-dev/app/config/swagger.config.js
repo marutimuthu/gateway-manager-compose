@@ -2,10 +2,10 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Gateway Management Backend",
+      title: "Device Management Backend",
       version: "1.0.0",
       description:
-        "APIs for registering, monitoring and managing Industrial Gateways",
+        "APIs for registering, monitoring and managing Industrial Gateways & Devices",
     },
     components: {
       securitySchemes: {

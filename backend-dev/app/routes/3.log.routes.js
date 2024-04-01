@@ -1,34 +1,28 @@
 module.exports = (app) => {
+  const log = require("../controllers/log.controller.js");
+
   var router = require("express").Router();
-  const file = require("../controllers/file.controller.js");
-  const { upload } = require("../middlewares");
 
-  // Create a new File
-  router.post("/:deviceID", upload.single("file"), file.create);
+  // Create Log
+  router.post("/:deviceID", log.create);
 
-  // Find Device Files
-  router.get("/all", file.getAllFiles);
+  // Retrieve all gateways from user device array
+  router.get("/:deviceID", log.findByID);
 
-  // Download file
-  router.get("/download/:fileID", file.download);
+  // Retrieve throughput
+  router.get("/stats/:deviceID", log.getstats);
 
-  // // Rename file
-  // router.put("/:deviceID", file.getOneFile);
-
-  // Download file - Pending
-  router.delete("/:fileID", file.delete);
-
-  app.use("/api/file", router);
+  app.use("/api/log", router);
 };
 
-// POST: /api/file/{deviceID}
+// POST: /api/log/{deviceID}
 /**
  * @swagger
- * /api/file/{deviceID}:
+ * /api/log/{deviceID}:
  *   post:
  *     tags:
- *     - : 'Device Files'
- *     summary: Post Device File
+ *     - : 'Device Logs'
+ *     summary: Post device log
  *     parameters:
  *      - in: path
  *        name: deviceID
@@ -38,15 +32,24 @@ module.exports = (app) => {
  *        description: deviceID
  *        example: 6605593f6939f3447baeee4e
  *     requestBody:
+ *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               file:
- *                  type: file
- *                  format: file
- *
+ *              wifi_rssi:
+ *                 type: integer
+ *                 example: -50
+ *              lte_rssi:
+ *                 type: integer
+ *                 example: -20
+ *              lat:
+ *                 type: string
+ *                 example: new
+ *              long:
+ *                 type: string
+ *                 example: test
  *     responses:
  *       '200':
  *         description: OK
@@ -58,7 +61,7 @@ module.exports = (app) => {
  *                message:
  *                   type: string
  *                   description: string
- *                   example: File Uploaded
+ *                   example: Received
  *       '400':
  *          description: Bad Request
  *          content:
@@ -81,14 +84,34 @@ module.exports = (app) => {
  *                    example: Internal Server Error
  */
 
-// GET: /api/file/all
+// GET: /api/log/{deviceID}
 /**
  * @swagger
- * /api/file/all:
+ * /api/log/{deviceID}:
  *   get:
  *     tags:
- *     - : 'Device Files'
- *     summary: Get All files
+ *     - : 'Device Logs'
+ *     summary: Get device logs
+ *     parameters:
+ *      - in: path
+ *        name: deviceID
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: deviceID
+ *        example: 6605593f6939f3447baeee4e
+ *      - in: query
+ *        name: page
+ *        schema:
+ *          type: integer
+ *          example: 1
+ *        description: The number of page
+ *      - in: query
+ *        name: limit
+ *        schema:
+ *          type: integer
+ *          example: 10
+ *        description: The numbers of items to return
  *     responses:
  *       '200':
  *         description: OK
@@ -134,21 +157,21 @@ module.exports = (app) => {
  *                    example: Internal Server Error
  */
 
-// GET: /api/file/download/{fileID}
+// GET: /api/log/stats/{deviceID}
 /**
  * @swagger
- * /api/file/download/{fileID}:
+ * /api/log/stats/{deviceID}:
  *   get:
  *     tags:
- *     - : 'Device Files'
- *     summary: Get device files
+ *     - : 'Device Logs'
+ *     summary: Get logs stats
  *     parameters:
  *      - in: path
- *        name: fileID
+ *        name: deviceID
  *        schema:
  *          type: string
  *        required: true
- *        description: fileID
+ *        description: deviceID
  *        example: 6605593f6939f3447baeee4e
  *     responses:
  *       '200':
@@ -159,10 +182,17 @@ module.exports = (app) => {
  *               type: object
  *               properties:
  *                data:
- *                   type: array
- *                   items:
- *                     type: object
- *                     example: "Array of objects"
+ *                   type: object
+ *                   properties:
+ *                      throughput_1h:
+ *                        type: integer
+ *                        example: 5
+ *                      throughput_24h:
+ *                        type: integer
+ *                        example: 10
+ *                      throughput_7d:
+ *                        type: integer
+ *                        example: 10
  *       '400':
  *          description: Bad Request
  *          content:
@@ -173,77 +203,6 @@ module.exports = (app) => {
  *                  data:
  *                    type: array
  *                    example: deviceID can not be empty
- *       '404':
- *          description: Not Found
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  message:
- *                    type: array
- *                    example: "Logs Not Found"
- *       '500':
- *          description: Internal Server Error
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  message:
- *                    type: array
- *                    example: Internal Server Error
- */
-
-// DELETE: /api/file/{fileID}
-/**
- * @swagger
- * /api/file/{fileID}:
- *   delete:
- *     tags:
- *     - : 'Device Files'
- *     summary: Get All files
- *     parameters:
- *      - in: path
- *        name: fileID
- *        schema:
- *          type: string
- *        required: true
- *        description: fileID
- *        example: 6605593f6939f3447baeee4e
- *     responses:
- *       '200':
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                data:
- *                   type: array
- *                   items:
- *                     type: object
- *                     example: "Array of objects"
- *       '400':
- *          description: Bad Request
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  data:
- *                    type: array
- *                    example: deviceID can not be empty
- *       '404':
- *          description: Not Found
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  message:
- *                    type: array
- *                    example: "Logs Not Found"
  *       '500':
  *          description: Internal Server Error
  *          content:
