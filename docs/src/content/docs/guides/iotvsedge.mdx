@@ -1,0 +1,76 @@
+---
+title: IoT Gateway Vs Edge Gateway
+description: core concepts
+---
+
+import { Image } from 'astro:assets';
+import edgeReference1 from "/src/assets/edge/edge-reference-2.png"; // Image is 1600x900
+
+
+An IoT Gateway and an Edge Gateway serve related but distinct roles in the ecosystem of connected devices and systems.
+
+#### Classification of IIoT devices based on data processing capabilities
+1. **IoT Gateway**
+2. **Edge Gateway**
+
+This guide explains the types of IoT Devices and understand the key differences between them.
+
+<Image src={edgeReference1} alt="A description of my image." /> 
+
+## ⭐️ What is an IoT Gateway?
+
+### Functionality:
+- Connectivity: Acts as a bridge between IoT devices/sensors and the cloud or other networks. It manages various communication protocols (e.g., MQTT, HTTP, CoAP) to ensure seamless data transmission.
+- Data Aggregation: Collects and aggregates data from multiple IoT devices before forwarding it to a central system for further processing.
+- Protocol Translation: Converts data from one protocol to another, enabling interoperability between different devices and systems.
+- Processing Capability: Generally performs minimal local data processing, primarily focused on forwarding data to the cloud or a central server.
+Some IoT gateways may offer basic data filtering or preprocessing, but they typically do not handle complex data analysis or computations.
+
+### Use Cases:
+- Smart homes (connecting various smart devices to the internet).
+- Industrial IoT (gathering data from machinery and sensors for centralized monitoring).
+- Agriculture (collecting data from field sensors for cloud-based analysis).
+
+### Popular IoT Gateways:
+- Teltonika
+- ESP32 based gateways
+- QUECTEL / SIMCOM based gateways
+
+## ⭐️ What is an Edge Gateway?
+
+### Functionality:
+- Local Processing: Performs significant data processing and analytics at the edge of the network, close to the source of data generation. This reduces the need to send all data to the cloud, which can save bandwidth and reduce latency.
+- Real-Time Decision Making: Enables real-time decision making and action by processing data locally. This is crucial for applications requiring immediate responses, such as autonomous vehicles or industrial automation.
+- Advanced Analytics and AI: Can run complex algorithms, machine learning models, and other computationally intensive tasks locally.
+- Processing Capability: Equipped with more powerful processors, storage, and sometimes GPUs to handle advanced computations.
+Capable of executing data analysis, filtering, aggregation, and even training or inference of machine learning models.
+
+### Use Cases:
+- Autonomous vehicles (processing sensor data for real-time navigation).
+- Smart manufacturing (real-time quality control and predictive maintenance).
+- Healthcare (local analysis of patient data for immediate alerts or diagnostics).
+- Retail (local processing of customer data for personalized services and quick checkouts).
+
+### Popular Edge Gateways:
+- Raspberry Pi
+- Nvidia Jetson
+
+## ✨ Key Differences
+
+#### 1. Primary Role:
+- IoT Gateway: Focuses on connectivity, data aggregation, and protocol translation.
+- Edge Compute Gateway: Focuses on local data processing, real-time analytics, and decision making.
+
+#### 2. Processing Power:
+- IoT Gateway: Limited local processing capabilities.
+- Edge Compute Gateway: Advanced processing capabilities, often with support for machine learning and complex analytics.
+
+#### 3. Latency and Bandwidth:
+- IoT Gateway: Higher latency due to reliance on cloud processing; potential higher bandwidth usage.
+- Edge Compute Gateway: Lower latency due to local processing; optimized bandwidth usage by sending only essential data to the cloud.
+
+#### 4. Deployment Scenarios:
+- IoT Gateway: Suitable for applications where data can be processed centrally with no immediate need for real-time decision making.
+- Edge Compute Gateway: Essential for applications requiring real-time insights, immediate actions, and reduced reliance on cloud connectivity.
+
+In summary, while both IoT gateways and edge compute gateways play crucial roles in the IoT ecosystem, their functions, processing capabilities, and use cases are tailored to different needs and scenarios. An IoT gateway is ideal for connecting and managing devices, whereas an edge compute gateway is designed for advanced local processing and real-time decision making.

@@ -1,11 +1,11 @@
 ---
-title: Gateway Manager
+title: Edge Native <br/> Device & Data Source Management
 description: Manage Industrial Gateways
 template: splash
 hero:
-  tagline: Universal Device Management console for Industrial Gateways
+  tagline: Containerised solution for IIoT Device planning, installation, maintaince and decommissioning
   image:
-    file: ../../assets/unnamed.png
+    file: ../../assets/device/DLC.png
   actions:
     - text: View Documentation
       link: /guides/overview/
@@ -15,33 +15,32 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
-import edgeOps from "/src/assets/edge-ops.png"; // Image is 1600x900
-import dataFlow from "/src/assets/1568101830431.png"; // Image is 1600x900
-
-## Device Management Overview
-
-<Image src={dataFlow} alt="A description of my image." /> 
 
 ### Features
 <CardGrid stagger>
 	<Card title="Universal Compatiblility" icon="pencil">
-		- Self registeration of gateways
+		- Deep integrations with popular devices like:
 			- `Teltonika`
-			- `LogicIO LT Gateway`
-			- `3rd Party Gateway`
+			- `LogicIO`
+			- `Raspberry Pi`
+			- `Nvidia Jetson`
+			- `ESP32`
 	</Card>
 	<Card title="360° Configurations" icon="add-document">
-		- Network Config: `4G, Wifi, Ethernet`
-		- Field Communication Config: `Modbus RTU / TCPIP, CANBUS, RS232` 
-		- Gateway Config: `Internal Status, OTA, Configurations and Firmware Storage`
+		- Device Configuration
+		- Asset Configuration
+		- Network Config: `4G, Wifi, Ethernet, etc`
+		- Field Communication Config: `Modbus RTU / TCPIP, CANBUS, RS232, etc` 
 	</Card>
 	<Card title="Multi-Protocol Integrations" icon="setting">
-		- `HTTPS / MQTTS`
-		- `Websockets`
-		- `CODEC Protocol`
+		- `Embedded Protocols : I2C, SPI, UART`
+		- `Industrial Protocols : Modbus, OPCUA`
+		- `Automotive Protocols : CAN`
+		- `Connectivity Protocols : Websockets, MQTTS, REST APIs`
 	</Card>
 	<Card title="Proactive Monitoring" icon="open-book">
-		- Device Heartbeat Monitoring for device health
-		- Gateway Activity Monitoring & Alerting Pipelines 
+		- Real time monitoring
+		- Device Heartbeat Monitoring
+		- Incident Tracking and Alerting
 	</Card>
 </CardGrid>

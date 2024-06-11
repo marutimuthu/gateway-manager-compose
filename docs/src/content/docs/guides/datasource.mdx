@@ -1,0 +1,22 @@
+---
+title: Data Pipeline
+description: core concepts
+---
+
+import { Image } from 'astro:assets';
+import Image1 from "/src/assets/datasource/samplePipeline.png"; // Image is 1600x900
+
+## Sample Data Pipeline 
+
+<Image src={Image1} alt="A description of my image." /> 
+- Data Source Config: Configuration of the data source from which data will be collected.
+- Data Address: The address or location of the data source.
+- Raw Data: The initial, unprocessed data collected from the source.
+- Filter: A process where the raw data is filtered to remove unwanted information or to focus on specific data points.
+- Transform: Transformation of the filtered data into a suitable format or structure for further processing.
+- Processed Data: The data after it has been filtered and transformed.
+- Notify: A process that sends notifications about the processed data.
+- Hot Store: Storage of processed data in a system that allows for quick access and retrieval.
+- Publish to UNS: The process of publishing the processed data to an UNS (unified namespace).
+- Aggregate: Aggregation of data from the hot store, potentially summarizing or combining it for further analysis.
+- Cold Store: Long-term storage of aggregated data, typically less expensive and slower to access compared to hot storage.

@@ -1,0 +1,75 @@
+---
+title: Edge Computing vs Cloud Computing
+description: A guide in my new Starlight docs site.
+---
+
+import { Image } from 'astro:assets';
+
+import Image1 from "/src/assets/edge/edgevscloud.png"; // Image is 1600x900
+import Image2 from "/src/assets/edge/edge-advantages.png"; // Image is 1600x900
+
+Edge computing and cloud computing are two distinct paradigms used for processing, storing, and managing data, each with its own set of advantages and applications. 
+
+<Image src={Image1} alt="A description of my image." /> 
+
+### 🧩 Location of Data Processing
+#### Edge Computing:
+- Data is processed at or near the source of data generation, such as sensors, IoT devices, or local servers.
+- Reduces latency and bandwidth usage by minimizing the distance data must travel.
+#### Cloud Computing:
+- Data is processed in centralized data centers, often located far from the data source.
+- Typically involves longer latency due to the distance data must travel to reach these data centers.
+
+### 🧩 Latency
+#### Edge Computing:
+- Offers low latency since data processing occurs closer to the data source.
+- Ideal for real-time applications like autonomous vehicles, industrial automation, and augmented reality.
+#### Cloud Computing:
+- Higher latency compared to edge computing because data must be sent to and from remote servers.
+- Suitable for applications where real-time processing is not critical, such as data analytics and large-scale computations.
+
+### 🧩 Bandwidth Usage
+#### Edge Computing:
+- Reduces the amount of data sent over the network by processing data locally and only sending necessary information to the cloud.
+- Efficient for environments with limited or expensive bandwidth.
+#### Cloud Computing:
+- Requires significant bandwidth to send large amounts of raw data to centralized servers for processing.
+- Often used in environments with robust and affordable network infrastructure.
+
+### 🧩 Scalability
+#### Edge Computing:
+- Scalability can be more challenging due to the need for deploying and managing numerous edge devices.
+- Suitable for scenarios where localized, smaller-scale processing is sufficient.
+#### Cloud Computing:
+- Highly scalable, leveraging the vast resources of large data centers to handle massive workloads.
+- Ideal for applications requiring significant computational power and storage.
+
+### 🧩 Security
+#### Edge Computing:
+- Can provide better security for sensitive data by keeping it local and reducing exposure to potential attacks during transmission.
+- However, securing a large number of edge devices can be complex.
+#### Cloud Computing:
+- Centralized nature makes it easier to implement comprehensive security measures, but data is potentially more vulnerable during transmission.
+- Cloud providers often offer advanced security features and compliance with various regulations.
+
+### 🧩 Cost
+#### Edge Computing:
+- Can be cost-effective for reducing data transmission and cloud storage costs.
+- Initial setup and maintenance of edge infrastructure can be expensive.
+#### Cloud Computing:
+- Offers cost efficiency through pay-as-you-go models and eliminates the need for significant upfront infrastructure investment.
+- Potentially higher costs for data transfer and storage, especially for large volumes of data.
+
+### 🧩 Use Cases
+#### Edge Computing:
+- Real-time data processing and decision-making.
+- IoT applications, smart cities, autonomous systems, and remote monitoring.
+#### Cloud Computing:
+- Large-scale data processing and storage.
+- Enterprise applications, data analytics, machine learning, and SaaS (Software as a Service) offerings.
+
+### 📍 Summary
+- Edge Computing is about bringing computation and data storage closer to the location where it is needed, to improve response times and save bandwidth.
+- Cloud Computing is about delivering computing services over the internet, leveraging large-scale data centers to provide scalable and flexible resources.
+
+<Image src={Image2} alt="A description of my image." /> 
